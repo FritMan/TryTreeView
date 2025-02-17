@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ExWpfChemp.Data;
+using ExWpfChemp.Pages;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -29,13 +31,43 @@ namespace ExWpfChemp
             Db.Subdivision.Load();
             Db.Role.Load();
         }
-
-        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        public void LoadData()
         {
-            if (MainFrame.CanGoBack)
+            employeeDataGrid.ItemsSource = Db.Employee.ToList();
+        }
+
+        private void AddEditBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var selected_emp = employeeDataGrid.SelectedItem as Employee;
+            var selected_sub = MainTreeView.SelectedItem as Subdivision;
+
+
+            if (selected_emp != null)
             {
-                MainFrame.GoBack();
+                var tree_window = new EditTreeWindow(selected_emp.Id, selected_sub);
+                tree_window.Owner = this;
+                tree_window.ShowDialog();
             }
+            else  if(selected_emp == null && selected_sub != null)
+            {
+                var tree_window = new EditTreeWindow(-1, selected_sub);
+                tree_window.Owner = this;
+                tree_window.ShowDialog();
+            }
+        }
+
+        private void MainTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var selected_sub = MainTreeView.SelectedItem as Subdivision;
+            if (selected_sub != null)
+            {
+                employeeDataGrid.ItemsSource = Db.Employee.Where(el => el.SubdivisionId == selected_sub.Id).ToList();
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainTreeView.ItemsSource = Db.Subdivision.Where(el => el.HeadId == null).ToList();
         }
     }
 }

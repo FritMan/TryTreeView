@@ -9,6 +9,6 @@ namespace ExWpfChemp.Classes
 {
     public static class Help
     {
-        public static SessionDBEntities Db = new SessionDBEntities();
+        public static SessionDBEntities1 Db = new SessionDBEntities1();
     }
 }

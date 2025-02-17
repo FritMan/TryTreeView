@@ -13,10 +13,10 @@ namespace ExWpfChemp.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SessionDBEntities : DbContext
+    public partial class SessionDBEntities1 : DbContext
     {
-        public SessionDBEntities()
-            : base("name=SessionDBEntities")
+        public SessionDBEntities1()
+            : base("name=SessionDBEntities1")
         {
         }
     

@@ -27,7 +27,7 @@
           <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Photo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="SubdivisionId" Type="int" />
+          <Property Name="SubdivisionId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="HeadId" Type="int" />
           <Property Name="AssistantId" Type="int" />
@@ -185,20 +185,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Employee_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Employee">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Employee_Subdivision">
-          <End Role="Subdivision" Type="Self.Subdivision" Multiplicity="0..1" />
+          <End Role="Subdivision" Type="Self.Subdivision" Multiplicity="1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subdivision">
@@ -451,10 +439,6 @@
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Employee1" EntitySet="Employee" />
           </AssociationSet>
-          <AssociationSet Name="FK_Employee_Role" Association="Self.FK_Employee_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
           <AssociationSet Name="FK_Employee_Subdivision" Association="Self.FK_Employee_Subdivision">
             <End Role="Subdivision" EntitySet="Subdivision" />
             <End Role="Employee" EntitySet="Employee" />
@@ -561,7 +545,7 @@
           <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SubdivisionId" Type="Int32" />
+          <Property Name="SubdivisionId" Type="Int32" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="HeadId" Type="Int32" />
           <Property Name="AssistantId" Type="Int32" />
@@ -576,7 +560,6 @@
           <NavigationProperty Name="Employee2" Relationship="Self.FK_Employee_Employee" FromRole="Employee1" ToRole="Employee" />
           <NavigationProperty Name="Employee11" Relationship="Self.FK_Employee_Employee1" FromRole="Employee" ToRole="Employee1" />
           <NavigationProperty Name="Employee3" Relationship="Self.FK_Employee_Employee1" FromRole="Employee1" ToRole="Employee" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_Employee_Role" FromRole="Employee" ToRole="Role" />
           <NavigationProperty Name="Subdivision" Relationship="Self.FK_Employee_Subdivision" FromRole="Employee" ToRole="Subdivision" />
           <NavigationProperty Name="Material" Relationship="Self.FK_Material_Employee" FromRole="Employee" ToRole="Material" />
           <NavigationProperty Name="Meeting" Relationship="Self.FK_Meeting_Employee" FromRole="Employee" ToRole="Meeting" />
@@ -706,7 +689,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Role" FromRole="Role" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -785,20 +767,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Employee_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Employee">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Employee_Subdivision">
-          <End Role="Subdivision" Type="Self.Subdivision" Multiplicity="0..1" />
+          <End Role="Subdivision" Type="Self.Subdivision" Multiplicity="1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subdivision">
@@ -1001,7 +971,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SessionDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SessionDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Area" EntityType="Self.Area" />
           <EntitySet Name="Direction" EntityType="Self.Direction" />
           <EntitySet Name="Employee" EntityType="Self.Employee" />
@@ -1034,10 +1004,6 @@
           <AssociationSet Name="FK_Employee_Employee1" Association="Self.FK_Employee_Employee1">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Employee1" EntitySet="Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employee_Role" Association="Self.FK_Employee_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_Subdivision" Association="Self.FK_Employee_Subdivision">
             <End Role="Subdivision" EntitySet="Subdivision" />
@@ -1113,7 +1079,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище SessionDBModelContainer" CdmEntityContainer="SessionDBEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SessionDBModelContainer" CdmEntityContainer="SessionDBEntities1">
           <EntitySetMapping Name="Area">
             <EntityTypeMapping TypeName="SessionDBModel.Area">
               <MappingFragment StoreEntitySet="Area">

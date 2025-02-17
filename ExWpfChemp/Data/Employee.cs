@@ -34,7 +34,7 @@ namespace ExWpfChemp.Data
         public string Surname { get; set; }
         public string Lastname { get; set; }
         public string Photo { get; set; }
-        public Nullable<int> SubdivisionId { get; set; }
+        public int SubdivisionId { get; set; }
         public int RoleId { get; set; }
         public Nullable<int> HeadId { get; set; }
         public Nullable<int> AssistantId { get; set; }
@@ -52,7 +52,6 @@ namespace ExWpfChemp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employee11 { get; set; }
         public virtual Employee Employee3 { get; set; }
-        public virtual Role Role { get; set; }
         public virtual Subdivision Subdivision { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Material> Material { get; set; }
