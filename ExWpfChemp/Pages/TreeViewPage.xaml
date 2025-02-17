@@ -11,6 +11,7 @@
 
     <Page.Resources>
         <CollectionViewSource x:Key="employeeViewSource" d:DesignSource="{d:DesignInstance {x:Type Data:Employee}}"/>
+        <CollectionViewSource x:Key="employeeViewSource1" d:DesignSource="{d:DesignInstance {x:Type Data:Employee}}"/>
     </Page.Resources>
 
     <Grid DataContext="{StaticResource employeeViewSource}">
@@ -35,29 +36,19 @@
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <Button x:Name="AddEditBtn" Click="AddEditBtn_Click" Content="Добавить/Изменить" Width="150"/>
         </StackPanel>
-        <DataGrid x:Name="employeeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Column="1">
+        <DataGrid x:Name="employeeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource employeeViewSource1}}" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Column="1" Grid.Row="0">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="assistantIdColumn" Binding="{Binding Employee11}" Header="Assistant"/>
-                <DataGridTemplateColumn x:Name="birthDateColumn" Header="Birth Date">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
                 <DataGridTextColumn x:Name="cabNumColumn" Binding="{Binding CabNum}" Header="Cab Num"/>
-                <DataGridTextColumn x:Name="codeColumn" Binding="{Binding Code}" Header="Code" />
-                <DataGridTextColumn x:Name="emailColumn" Binding="{Binding Email}" Header="Email" />
-                <DataGridTextColumn x:Name="headIdColumn" Binding="{Binding Employee1.Name}" Header="Head"/>
-                <DataGridTextColumn x:Name="infoColumn" Binding="{Binding Info}" Header="Info" />
+                <DataGridTextColumn x:Name="emailColumn" Binding="{Binding Email}" Header="Email"/>
                 <DataGridTextColumn x:Name="lastnameColumn" Binding="{Binding Lastname}" Header="Lastname"/>
-                <DataGridTextColumn x:Name="mobPhoneColumn" Binding="{Binding MobPhone}" Header="Mob Phone" />
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" />
                 <DataGridTextColumn x:Name="phoneColumn" Binding="{Binding Phone}" Header="Phone" />
-                <DataGridTextColumn x:Name="photoColumn" Binding="{Binding Photo}" Header="Photo" />
                 <DataGridTextColumn x:Name="roleIdColumn" Binding="{Binding Role.Name}" Header="Role" />
+                <DataGridTextColumn x:Name="subdivisionIdColumn" Binding="{Binding Subdivision.Name}" Header="Subdivision"/>
                 <DataGridTextColumn x:Name="surnameColumn" Binding="{Binding Surname}" Header="Surname"/>
             </DataGrid.Columns>
         </DataGrid>
+
+
     </Grid>
 </Page>

@@ -35,7 +35,16 @@ namespace ExWpfChemp.Pages
 
         private void AddEditBtn_Click(object sender, RoutedEventArgs e)
         {
+            var selected_emp = employeeDataGrid.SelectedItem as Employee;
 
+            if(selected_emp != null)
+            {
+                NavigationService.Navigate(new EditTree(selected_emp.Id));
+            }
+            else
+            {
+                NavigationService.Navigate(new EditTree(-1));
+            }
         }
 
         private void MainTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
