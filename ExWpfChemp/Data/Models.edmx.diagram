@@ -43,6 +43,7 @@
         <AssociationConnector Association="SessionDBModel.FK_Material_Status" ManuallyRouted="false" />
         <AssociationConnector Association="SessionDBModel.FK_Miss_Reason" ManuallyRouted="false" />
         <AssociationConnector Association="SessionDBModel.FK_Subdivision_Subdivision" ManuallyRouted="false" />
+        <AssociationConnector Association="SessionDBModel.FK_Employee_Role" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

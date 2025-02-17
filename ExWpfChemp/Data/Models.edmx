@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище SessionDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище SessionDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="Id" />
@@ -182,6 +182,18 @@
             </Principal>
             <Dependent Role="Employee1">
               <PropertyRef Name="AssistantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -439,6 +451,10 @@
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Employee1" EntitySet="Employee" />
           </AssociationSet>
+          <AssociationSet Name="FK_Employee_Role" Association="Self.FK_Employee_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
           <AssociationSet Name="FK_Employee_Subdivision" Association="Self.FK_Employee_Subdivision">
             <End Role="Subdivision" EntitySet="Subdivision" />
             <End Role="Employee" EntitySet="Employee" />
@@ -516,8 +532,7 @@
             <End Role="Subdivision1" EntitySet="Subdivision" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SessionDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -569,6 +584,7 @@
           <NavigationProperty Name="News" Relationship="Self.FK_News_Employee" FromRole="Employee" ToRole="News" />
           <NavigationProperty Name="Responsible" Relationship="Self.FK_Responsible_Employee" FromRole="Employee" ToRole="Responsible" />
           <NavigationProperty Name="Subdivision1" Relationship="Self.FK_Subdivision_Employee" FromRole="Employee" ToRole="Subdivision" />
+          <NavigationProperty Name="Role" Relationship="SessionDBModel.FK_Employee_Role" FromRole="Employee" ToRole="Role" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -689,6 +705,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="SessionDBModel.FK_Employee_Role" FromRole="Role" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -1073,7 +1090,23 @@
             <End Role="Subdivision" EntitySet="Subdivision" />
             <End Role="Subdivision1" EntitySet="Subdivision" />
           </AssociationSet>
+          <AssociationSet Name="FK_Employee_Role" Association="SessionDBModel.FK_Employee_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Employee_Role">
+          <End Type="SessionDBModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="SessionDBModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

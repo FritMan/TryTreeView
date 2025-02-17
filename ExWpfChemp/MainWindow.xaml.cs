@@ -25,7 +25,7 @@ namespace ExWpfChemp
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {
+        { 
             InitializeComponent();
             Db.Employee.Load();
             Db.Subdivision.Load();
@@ -54,6 +54,7 @@ namespace ExWpfChemp
                 tree_window.Owner = this;
                 tree_window.ShowDialog();
             }
+            LoadData();
         }
 
         private void MainTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
