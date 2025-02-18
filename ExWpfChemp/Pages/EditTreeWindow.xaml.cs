@@ -48,8 +48,8 @@ namespace ExWpfChemp.Pages
             }
             else
             {
-                MessageBox.Show("Подчинённый и руководитель не могут быть одним сотрудником сразу!", "Информация", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                    MessageBox.Show("Подчинённый и руководитель не могут быть одним сотрудником сразу!", "Информация", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
             }
         }
 
@@ -80,8 +80,6 @@ namespace ExWpfChemp.Pages
             {
                 grid1.DataContext = new Data.Employee() { BirthDate = DateTime.Now, Subdivision = _sub };
                 loadEmployees(_sub.Id);
-                assistantComboBox.SelectedIndex = 0;
-                headComboBox.SelectedIndex = 0;
             }
             else
             {
