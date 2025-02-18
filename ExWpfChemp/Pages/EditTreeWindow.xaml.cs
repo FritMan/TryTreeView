@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -36,12 +37,20 @@ namespace ExWpfChemp.Pages
 
         private void OkBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (_Id == -1)
+            if((assistantComboBox.SelectedItem as Employee).Id != (headComboBox.SelectedItem as Employee).Id)
             {
-                Db.Employee.Add(grid1.DataContext as Employee);
+                if (_Id == -1)
+                {
+                    Db.Employee.Add(grid1.DataContext as Employee);
+                }
+                Db.SaveChanges();
+                this.Close();
             }
-            Db.SaveChanges();
-            this.Close();
+            else
+            {
+                MessageBox.Show("Подчинённый и руководитель не могут быть одним сотрудником сразу!", "Информация", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
@@ -54,9 +63,15 @@ namespace ExWpfChemp.Pages
             if(subdivisionComboBox.SelectedItem != null)
             {
                 var selected = subdivisionComboBox.SelectedItem as Subdivision;
-                assistantComboBox.ItemsSource = Db.Employee.Where(el => el.SubdivisionId == selected.Id).ToList();
-                headComboBox.ItemsSource = Db.Employee.Where(el => el.SubdivisionId == selected.Id).ToList();
+                loadEmployees(selected.Id);
+
             }
+        }
+
+        private void loadEmployees(int subId)
+        {
+            assistantComboBox.ItemsSource = Db.Employee.Where(el => el.SubdivisionId == subId).ToList();
+            headComboBox.ItemsSource = Db.Employee.Where(el => el.SubdivisionId == subId).ToList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -64,13 +79,15 @@ namespace ExWpfChemp.Pages
             if (_Id == -1 && _sub != null)
             {
                 grid1.DataContext = new Data.Employee() { BirthDate = DateTime.Now, Subdivision = _sub };
-                subdivisionComboBox.SelectedItem = _sub;
+                loadEmployees(_sub.Id);
+                assistantComboBox.SelectedIndex = 0;
+                headComboBox.SelectedIndex = 0;
             }
             else
             {
                 grid1.DataContext = Db.Employee.First(el => el.Id == _Id);
+                loadEmployees((grid1.DataContext as Employee).SubdivisionId);
                 grid1.IsEnabled = false;
-                subdivisionComboBox.SelectedItem = _sub;
             }
         }
     }

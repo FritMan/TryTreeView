@@ -58,7 +58,7 @@
                 <Label Grid.Column="0" Content="Role:" HorizontalAlignment="Left" Margin="3" Grid.Row="13" VerticalAlignment="Center"/>
                 <ComboBox x:Name="roleComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="13" SelectedItem="{Binding Role, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" DisplayMemberPath="Name"/>
                 <Label Grid.Column="0" Content="Subdivision:" HorizontalAlignment="Left" Margin="3" Grid.Row="14" VerticalAlignment="Center"/>
-                <ComboBox x:Name="subdivisionComboBox" SelectionChanged="subdivisionComboBox_SelectionChanged" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="14" SelectedItem="{Binding Subdivision1, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" DisplayMemberPath="Name"/>
+                <ComboBox x:Name="subdivisionComboBox" SelectionChanged="subdivisionComboBox_SelectionChanged" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="14" SelectedItem="{Binding Subdivision, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" DisplayMemberPath="Name"/>
                 <Label Grid.Column="0" Content="Surname:" HorizontalAlignment="Left" Margin="3" Grid.Row="15" VerticalAlignment="Center"/>
                 <TextBox x:Name="surnameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="15" Text="{Binding Surname, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             </Grid>
