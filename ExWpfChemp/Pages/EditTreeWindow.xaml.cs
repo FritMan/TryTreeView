@@ -45,7 +45,7 @@ namespace ExWpfChemp.Pages
         }
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
-        {
+        {   
             grid1.IsEnabled = true;
         }
 

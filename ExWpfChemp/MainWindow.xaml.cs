@@ -31,9 +31,9 @@ namespace ExWpfChemp
             Db.Subdivision.Load();
             Db.Role.Load();
         }
-        public void LoadData()
+        private void LoadData(Subdivision subdivision)
         {
-            employeeDataGrid.ItemsSource = Db.Employee.ToList();
+            employeeDataGrid.ItemsSource = Db.Employee.Where(el => el.SubdivisionId == subdivision.Id).ToList();
         }
 
         private void AddEditBtn_Click(object sender, RoutedEventArgs e)
@@ -54,7 +54,7 @@ namespace ExWpfChemp
                 tree_window.Owner = this;
                 tree_window.ShowDialog();
             }
-            LoadData();
+            LoadData(selected_sub);
         }
 
         private void MainTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

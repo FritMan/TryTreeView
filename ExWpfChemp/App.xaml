@@ -42,13 +42,12 @@
                     <ControlTemplate TargetType="TreeViewItem">
                         <Grid Margin="2">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-
-                            <Border BorderBrush="Black" Name="Bd" BorderThickness="1" Width="150">
-                                <ContentPresenter  ContentSource="Header" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Border BorderBrush="Black" x:Name="Bd" BorderThickness="1" Width="150">
+                                <ContentPresenter ContentSource="Header" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
 
                             <ItemsPresenter Grid.Row="1"/>
